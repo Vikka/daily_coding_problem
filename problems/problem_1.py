@@ -8,17 +8,16 @@ from typing import List
 
 
 def solution(numbers: List[int], target: int):
+    numbers_set = set(numbers)
     for number in numbers:
-        tmp_nbrs = numbers.copy()
-        tmp_nbrs.remove(number)
-
-        find = k - number
-        if find in tmp_nbrs:
-            return True, (number, find)
+        numbers_set.remove(number)
+        find = target - number
+        if find in numbers_set:
+            return True
     return False
 
 
 if __name__ == '__main__':
-    numbers_li = [10, 15, 3, 7]
-    k = 20
-    print(solution([10, 15, 2, 5], k))
+    assert solution([10, 15, 2, 5], 20)
+    assert solution([10, 15, 2, 5], 12)
+    assert not solution([10, 15, 2, 5], 8)
